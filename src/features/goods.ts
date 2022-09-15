@@ -1,4 +1,4 @@
-import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
 import { fetchGoods } from '../services/api';
 
 type GoodsState = {
@@ -17,15 +17,6 @@ const goodsSlice = createSlice({
   name: 'goods',
   initialState,
   reducers: {
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
-    },
-    setError: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
-    },
-    set: (state, action: PayloadAction<string[]>) => {
-      state.goods = action.payload;
-    },
     // #region add, take, clear actions
     add: (state, action: PayloadAction<string>) => {
       state.goods.push(action.payload);
@@ -37,25 +28,27 @@ const goodsSlice = createSlice({
       state.goods = [];
     },
     // #endregion
-  }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(init.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(init.fulfilled, (state, action) => {
+      state.goods = action.payload;
+      state.loading = false;
+    });
+
+    builder.addCase(init.rejected, (state) => {
+      state.loading = false;
+      state.error = 'Error';
+    });
+  },
 });
 
 export default goodsSlice.reducer;
-export const { set, add, take, clear, setLoading, setError } = goodsSlice.actions;
+export const { add, take, clear } = goodsSlice.actions;
 
-export const init = () => {
-  return (dispatch: Dispatch) => {
-    dispatch(setLoading(true));
-
-    fetchGoods()
-      .then(goodsFromServer => {
-        dispatch(set(goodsFromServer));
-      })
-      .catch(() => {
-        dispatch(setError('Something went wrong'));
-      })
-      .finally(() => {
-        dispatch(setLoading(false));
-      });
-  };
-}
+export const init = createAsyncThunk('goods/fetch', () => {
+  return fetchGoods();
+});
