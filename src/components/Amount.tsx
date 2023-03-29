@@ -1,17 +1,14 @@
-import { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { actions } from "../features/amount";
+import { useAppSelector } from "../app/hooks";
 
 export const Amount = () => {
-  const [amount, setAmount] = useState(0);
+    const dispatch = useDispatch();
+    const amount = useAppSelector(state => state.amount) //take a state and can return part of state
 
-  const take = (value: number) => {
-    setAmount(current => current - value);
-  };
-
-  const add = (value: number) => {
-    setAmount(current => current + value);
-  };
-
-  const clear = () => setAmount(0);
+  const add = (value: number) => dispatch(actions.add(value));
+  const take = (value: number) => dispatch(actions.take(value));
+  const clear = () => dispatch(actions.clear());
 
   return (
     <h2 className="amount">
