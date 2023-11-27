@@ -70,12 +70,12 @@ const positionReducer = (position = startPosition, action: Action): State => {
       case MOVE_DOWN:
         return {
           ...position,
-          y: position.y + action.distance
+          y: position.y - action.distance
         }
       case MOVE_UP:
         return {
           ...position,
-          y: position.y - action.distance
+          y: position.y + action.distance
         }
       default:
         return position

@@ -1,16 +1,18 @@
 // npm i redux @types/redux
-import { combineReducers, createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import amount from '../features/amount';
-import goods from '../features/goods';
-import position from '../features/position';
+import { combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit'
+import { amountSlice } from '../features/amount-slice';
+import { goodsSlice } from '../features/goods-slice';
+import { positionSlice } from '../features/position-slice';
 
 const reducer = combineReducers({
-    amount,
-    goods,
-    position,
+    amount: amountSlice.reducer,
+    goods: goodsSlice.reducer,
+    position: positionSlice.reducer,
 });
-const store = createStore(reducer, composeWithDevTools());
+const store = configureStore({
+    reducer,
+});
 
 export type RootState = ReturnType<typeof store.getState>
 

@@ -1,21 +1,21 @@
 import { useDispatch } from 'react-redux';
-import { actions } from '../features/amount';
 import { useAppSelector } from '../app/hooks';
+import { amountSlice } from '../features/amount-slice';
 
 export const Amount = () => {
-  const amount = useAppSelector((state) => state.amount);
+  const amount = useAppSelector((state) => state.amount.value);
   const dispatch = useDispatch();
 
   const take = (value: number) => {
-    dispatch(actions.take(value))
+    dispatch(amountSlice.actions.take(value))
   };
 
   const add = (value: number) => {
-    dispatch(actions.add(value))
+    dispatch(amountSlice.actions.add(value))
   };
 
   const clear = () => {
-    dispatch(actions.clear())
+    dispatch(amountSlice.actions.clear())
   }
 
   return (
