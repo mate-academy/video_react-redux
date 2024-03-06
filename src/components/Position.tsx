@@ -6,10 +6,10 @@ export const Position = () => {
   const {x, y} = useAppSelector(state => state.position);
   const dispatch = useDispatch();
 
-  const moveLeft = () => dispatch(action.moveLeft(1));
-  const moveRight = () => dispatch(action.moveRight(1));
-  const moveUp = () => dispatch(action.moveUp(1));
-  const moveDown = () => dispatch(action.moveDown(1));
+  const moveLeft = () => dispatch(action.moveLeft());
+  const moveRight = () => dispatch(action.moveRight());
+  const moveUp = () => dispatch(action.moveUp());
+  const moveDown = () => dispatch(action.moveDown());
 
   const transformValue = `translate(${x * 100}%, ${y * 100}%)`;
 

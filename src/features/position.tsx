@@ -8,7 +8,7 @@ type MoveLeftAction = {
   distance: number
 }
 
-const moveLeft = (distance: number): MoveLeftAction => ({
+const moveLeft = (distance = 1): MoveLeftAction => ({
   type: MOVE_LEFT,
   distance
 });
@@ -18,7 +18,7 @@ type MoveRightAction = {
   distance: number
 }
 
-const moveRight = (distance: number): MoveRightAction => ({
+const moveRight = (distance = 1): MoveRightAction => ({
   type: MOVE_RIGHT,
   distance
 });
@@ -28,7 +28,7 @@ type MoveUpAction = {
   distance: number
 }
 
-const moveUp = (distance: number): MoveUpAction => ({
+const moveUp = (distance = 1): MoveUpAction => ({
   type: MOVE_UP,
   distance
 });
@@ -38,7 +38,7 @@ type MoveDownAction = {
   distance: number
 }
 
-const moveDown = (distance: number): MoveDownAction => ({
+const moveDown = (distance = 1): MoveDownAction => ({
   type: MOVE_DOWN,
   distance
 });
