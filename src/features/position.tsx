@@ -52,9 +52,9 @@ type InilialState = {
   x: number,
   y: number,
 }
-const INITIAL_STATE: InilialState = { x: 0, y: 0 };
+const INITIAL_STATE = { x: 0, y: 0 };
 
-const positionReducer = (position = INITIAL_STATE, action: Action) => {
+const positionReducer = (position = INITIAL_STATE, action: Action): InilialState => {
   switch (action.type) {
     case MOVE_LEFT:
       return {
