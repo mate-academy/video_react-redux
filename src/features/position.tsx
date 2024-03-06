@@ -48,7 +48,11 @@ type Action = MoveLeftAction
   | MoveUpAction
   | MoveDownAction
 
-const INITIAL_STATE = { x: 0, y: 0 };
+type InilialState = {
+  x: number,
+  y: number,
+}
+const INITIAL_STATE: InilialState = { x: 0, y: 0 };
 
 const positionReducer = (position = INITIAL_STATE, action: Action) => {
   switch (action.type) {
