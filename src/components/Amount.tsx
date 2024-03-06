@@ -1,21 +1,27 @@
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { RootState } from '../app/store';
+import { actions } from '../features/amount';
 
 export const Amount = () => {
-  const [amount, setAmount] = useState(0);
+  const result = useSelector((state: RootState) => state.amount);
+  const dispatch = useDispatch();
 
   const take = (value: number) => {
-    setAmount(current => current - value);
+    dispatch(actions.take(value))
   };
 
   const add = (value: number) => {
-    setAmount(current => current + value);
+    dispatch(actions.add(value))
   };
 
-  const clear = () => setAmount(0);
+  const clear = () => {
+    dispatch(actions.clear())
+  };
 
   return (
     <h2 className="amount">
-      <span>Amount: {amount}</span>
+      <span>Amount: {result} PLN</span>
 
       <button onClick={() => take(50)}>-50</button>
       <button onClick={() => take(10)}>-10</button>
