@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { action } from '../features/position';
+import { useAppSelector } from '../app/hooks';
+import { useDispatch } from 'react-redux';
 
 export const Position = () => {
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
+  const {x, y} = useAppSelector(state => state.position);
+  const dispatch = useDispatch();
 
-  const moveLeft = () => setX(x => x - 1);
-  const moveRight = () => setX(x => x + 1);
-  const moveUp = () => setY(y => y - 1);
-  const moveDown = () => setY(y => y + 1);
+  const moveLeft = () => dispatch(action.moveLeft(1));
+  const moveRight = () => dispatch(action.moveRight(1));
+  const moveUp = () => dispatch(action.moveUp(1));
+  const moveDown = () => dispatch(action.moveDown(1));
 
   const transformValue = `translate(${x * 100}%, ${y * 100}%)`;
 
