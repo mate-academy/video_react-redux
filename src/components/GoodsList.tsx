@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { useAppSelector } from '../app/hooks';
 import { useDispatch } from 'react-redux';
-import { actions } from '../features/goods';
+import { goodsSlice } from '../features/goods-slice';
 
 export const GoodsList = () => {
   const [newGood, setNewGood] = useState('');
 
-  const goods = useAppSelector(state => state.goods);
+  const goods = useAppSelector(state => state.goods.value);
   const dispatch = useDispatch();
 
-  const addGood = (goodToAdd: string) => {
-    dispatch(actions.add(goodToAdd));
+  const addGood = (goodToAdd: String) => {
+    dispatch(goodsSlice.actions.add(goodToAdd));
   }
 
-  const removeGood = (goodToRemove: string) => {
-    dispatch(actions.take(goodToRemove));
+  const removeGood = (goodToRemove: String) => {
+    dispatch(goodsSlice.actions.take(goodToRemove));
   };
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -43,7 +43,7 @@ export const GoodsList = () => {
 
       <ul>
         {goods.map(good => (
-          <li key={good}>
+          <li>
             <button
               onClick={() => removeGood(good)} 
               className="delete"

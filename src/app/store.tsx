@@ -1,13 +1,13 @@
 import { combineReducers, } from 'redux';
 import { configureStore } from '@reduxjs/toolkit'
-import goodsReducer from '../features/goods'
-import positionReducer from '../features/position';
 import { amountSlice } from '../features/amount-slice';
+import { goodsSlice } from '../features/goods-slice';
+import { positionSlice } from '../features/position-slice';
 
 const reducer = combineReducers({
     amount: amountSlice.reducer,
-    goods: goodsReducer,
-    position: positionReducer
+    goods: goodsSlice.reducer,
+    position: positionSlice.reducer
 });
 const store = configureStore({reducer});
 
