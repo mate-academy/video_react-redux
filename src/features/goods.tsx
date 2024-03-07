@@ -1,6 +1,5 @@
 const ADD = 'goods/ADD';
 const TAKE = 'goods/TAKE';
-const CLEAR = 'goods/CLEAR';
 
 type AddAction = {
   type: typeof ADD,
@@ -22,15 +21,7 @@ const take = (value: string): TakeAction => ({
   value
 });
 
-type ClearAction = {
-  type: typeof CLEAR,
-}
-
-const clear = (): ClearAction => ({
-  type: CLEAR
-})
-
-type Action = AddAction | TakeAction | ClearAction
+type Action = AddAction | TakeAction
 
 const INITIAL_STATE = ['Apple', 'Banana', 'Pear'];
 
@@ -40,8 +31,6 @@ const reducer = (goods = INITIAL_STATE, action: Action) => {
       return [...goods, action.value];
     case TAKE:
       return goods.filter(good => good !== action.value);
-    case CLEAR:
-      return [];
     default:
       return goods;
   }
@@ -50,7 +39,6 @@ const reducer = (goods = INITIAL_STATE, action: Action) => {
 export const actions = {
   add,
   take,
-  clear
 }
 
 export default reducer;
