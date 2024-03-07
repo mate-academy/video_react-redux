@@ -1,11 +1,11 @@
 import { combineReducers, } from 'redux';
 import { configureStore } from '@reduxjs/toolkit'
-import amountReducer from '../features/amount';
 import goodsReducer from '../features/goods'
 import positionReducer from '../features/position';
+import { amountSlice } from '../features/amount-slice';
 
 const reducer = combineReducers({
-    amount: amountReducer,
+    amount: amountSlice.reducer,
     goods: goodsReducer,
     position: positionReducer
 });
