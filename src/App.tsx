@@ -1,7 +1,7 @@
-import './App.scss';
-import { Amount } from './components/Amount';
-import { GoodsList } from './components/GoodsList';
-import { Position } from './components/Position';
+import "./App.scss";
+import { Amount } from "./components/Amount";
+import { GoodsList } from "./components/GoodsList";
+import { Position } from "./components/Position";
 
 export const App = () => {
   return (
@@ -13,4 +13,4 @@ export const App = () => {
       <GoodsList />
     </div>
   );
-}
+};
