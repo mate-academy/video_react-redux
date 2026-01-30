@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useAppSelector } from "../app/hooks";
+import { useDispatch } from "react-redux";
+import { actions as goodsActions } from "../features/goods";
 
 export const GoodsList = () => {
-  const [newGood, setNewGood] = useState('');
-  const [goods, setGoods] = useState<string[]>(['Apple', 'Banana', 'Coconut']);
+  const [newGood, setNewGood] = useState("");
+  const dispatch = useDispatch();
+  const goods = useAppSelector((state) => state.goods);
 
-  const addGood = (goodToAdd: string) => {
-    setGoods(current => [...current, goodToAdd]);
-  }
-
-  const removeGood = (goodToRemove: string) => {
-    setGoods(current => current.filter(
-      good => good !== goodToRemove,
-    ));
-  };
+  const addGood = (goodToAdd: string) => dispatch(goodsActions.add(goodToAdd));
+  const removeGood = (goodToRemove: string) =>
+    dispatch(goodsActions.remove(goodToRemove));
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -22,7 +20,7 @@ export const GoodsList = () => {
     }
 
     addGood(newGood);
-    setNewGood('');
+    setNewGood("");
   };
 
   return (
@@ -33,18 +31,15 @@ export const GoodsList = () => {
         <input
           type="text"
           value={newGood}
-          onChange={e => setNewGood(e.target.value)}
+          onChange={(e) => setNewGood(e.target.value)}
         />
         <button>Add</button>
       </form>
 
       <ul>
-        {goods.map(good => (
+        {goods.map((good) => (
           <li key={good}>
-            <button
-              onClick={() => removeGood(good)} 
-              className="delete"
-            />
+            <button onClick={() => removeGood(good)} className="delete" />
 
             {good}
           </li>
